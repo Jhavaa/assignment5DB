@@ -16,10 +16,18 @@ c = conn.cursor()
 # c.execute("INSERT INTO Sightings Values (:name, :person, :location, :sighted)", {'name': sight_1.name, 'person': sight_1.person, 'location': sight_1.location, 'sighted': sight_1.sighted})
 
 # Select all entries in the table Flowers from 'flowers2019.db'
-c.execute("SELECT * FROM Flowers")
+c.execute("SELECT comname FROM Flowers ORDER BY comname")
 
-# fetch all entries returned by the SQL query
-print(c.fetchall())
+# fetch all entries returned by the SQL query and saves list to itemsFlowers
+itemsFlowers = c.fetchall()
+
+# Select all entries in the table Flowers from 'flowers2019.db'
+c.execute("SELECT * FROM Sightings")
+
+# fetch all entries returned by the SQL query and saves list to itemsFlowers
+itemsSightings = c.fetchall()
+
+
 
 # Save query
 conn.commit()
@@ -34,5 +42,6 @@ def home():                      # call method home
     if request.form:
         print(request.form)
     return render_template("home.html")       # which returns 'home.html' template
+
 if __name__ == "__main__":        # on running python app.py
     app.run()                     # run the flask app
